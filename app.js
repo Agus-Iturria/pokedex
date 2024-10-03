@@ -28,6 +28,25 @@ function displayPokemons(pokemonList) {
         pokemonCardsContainer.innerHTML += card;
     });
 }
+function searchPokemon() {
+    const searchInput = document.getElementById('search-input').value.toLowerCase();
+    
+    if (searchInput) {
+        fetchPokemons(currentPage).then(() => {
+            const pokemonCards = document.querySelectorAll('.pokemon-card');
+            pokemonCards.forEach(card => {
+                const pokemonName = card.querySelector('h3').textContent.toLowerCase();
+                if (!pokemonName.includes(searchInput)) {
+                    card.style.display = 'none';
+                } else {
+                    card.style.display = 'block';
+                }
+            });
+        });
+    } else {
+        fetchPokemons(currentPage);
+    }
+}
 
 function nextPage() {
     currentPage++;
