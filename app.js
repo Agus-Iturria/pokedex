@@ -58,6 +58,10 @@ async function searchPokemon() {
     .getElementById("search-input")
     .value.toLowerCase()
     .trim();
+  if (searchInput === "") {
+    fetchPokemons(currentPage);
+    return;
+  }
   const pokemonCards = document.querySelectorAll(".pokemon-card");
   pokemonCardsContainer.innerHTML = "";
 
@@ -65,6 +69,7 @@ async function searchPokemon() {
     const pokemonName = card.querySelector("h3").textContent.toLowerCase();
     const pokemonSprite = card.querySelector("img").src;
     const pokemonTypes = card.querySelector("p").textContent;
+
     if (pokemonName.includes(searchInput)) {
       const newCard = `
           <div class="pokemon-card">
