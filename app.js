@@ -41,10 +41,10 @@ async function displayPokemons(pokemonList) {
     const pokemonDetails = await getPokemonDetails(pokemon.url);
     if (pokemonDetails) {
       const sprite = pokemonDetails.sprites.front_default;
-      const types = pokemonDetails.types.map((typeInfo) => typeInfo.type.name);
+      const types = pokemonDetails.types.map((typeInfo) => typeInfo.type.name).join(" - ");
       const card = `
                 <div class="pokemon-card">
-                    <h3>${pokemon.name}</h3>
+                    <h3>${pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}</h3>
                     <img src="${sprite}">
                     <p>${types}</p>
                 </div>`;
@@ -54,17 +54,15 @@ async function displayPokemons(pokemonList) {
 }
 
 async function searchPokemon() {
-  const searchInput = document
-    .getElementById("search-input")
-    .value.toLowerCase()
-    .trim();
+  const searchInputElement = document.getElementById("search-input");
+  const searchInput = searchInputElement.value.toLowerCase().trim();
+  searchInputElement.value = "";
   if (searchInput === "") {
     fetchPokemons(currentPage);
     return;
   }
   const pokemonCards = document.querySelectorAll(".pokemon-card");
   pokemonCardsContainer.innerHTML = "";
-
   for (const card of pokemonCards) {
     const pokemonName = card.querySelector("h3").textContent.toLowerCase();
     const pokemonSprite = card.querySelector("img").src;

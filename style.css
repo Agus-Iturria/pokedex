@@ -2,149 +2,143 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-}
-
-
-header {
+ }
+ 
+ body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fafafa;
+    color: #333;
+ }
+ 
+ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
-    background-color: #f0f0f0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.logo img {
-    height: 40px;
-}
-
-.search-bar {
+    padding: 15px;
+    background-color: #ffcc00;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+ }
+ 
+ .logo img {
+    height: 50px;
+ }
+ 
+ .search-bar {
     width: 100%;
     display: flex;
     justify-content: center;
-}
-
-.search-bar input {
+    margin-top: 10px;
+ }
+ 
+ .search-bar input {
     width: 70%;
-    padding: 8px 10px;
-    border: 2px solid #ddd;
-    border-radius: 25px;
-    font-size: 15px;
-    outline: none;
-    transition: border-color 0.3s ease;
-    margin-right: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.search-bar button {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 25px;
-    background-color: #f73333;
-    color: #ededed;
-    font-size: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-main {
-    padding: 20px;
-}
-
-.cards-container {
-    display: grid;
-    grid-template-columns: 1fr; 
-    gap: 15px;
-}
-
-.pokemon-card {
-    border: 2px solid #ccc;
-    border-radius: 10px;
     padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+    margin-right: 10px;
+ }
+ 
+ .search-bar input:focus {
+    border-color: #ff1500;
+ }
+ 
+ .search-bar button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    background-color: #ff1500;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+ }
+ 
+ .search-bar button:hover {
+    background-color: #ff1500;
+ }
+ 
+ main {
+    padding: 20px;
+ }
+ 
+ .cards-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+ }
+ 
+ .pokemon-card {
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    padding: 15px;
     text-align: center;
-    background-color: #f7f7f7;
-}
-
-.pokemon-card img {
-    width: 80px;
-    height: 80px;
-}
-
-.pagination {
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+ }
+ 
+ .pokemon-card:hover {
+    transform: translateY(-5px);
+ }
+ 
+ .pokemon-card img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+ }
+ 
+ .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
-}
-
-.pagination button {
-    padding: 8px 15px;
-    margin: 0 5px;
+    margin-top: 30px;
+ }
+ 
+ .pagination button {
+    padding: 10px 20px;
+    margin: 0 10px;
     border: none;
-    border-radius: 25px;
-    background-color: #f73333;
-    color: #ededed;
-    font-size: 14px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-#page-num {
+    border-radius: 30px;
+    background-color: #ff1500;
+    color: #ffffff;
     font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+ }
+ 
+ 
+ #page-num {
+    font-size: 18px;
     font-weight: bold;
     margin: 0 10px;
-}
-
-
-@media (min-width: 768px) {
+ }
+ 
+ @media (min-width: 768px) {
     header {
         flex-direction: row;
         justify-content: space-between;
-        padding: 20px;
     }
-
-    .logo img {
-        height: 50px;
-    }
-
+ 
     .search-bar input {
         width: 250px;
-        font-size: 16px;
     }
-
-    .search-bar button {
-        font-size: 16px;
-    }
-
+ 
     .cards-container {
         grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
     }
-
+ 
     .pokemon-card img {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
     }
-
-    .pagination button {
-        padding: 10px 20px;
-        font-size: 16px;
-    }
-
-    #page-num {
-        font-size: 18px;
-    }
-}
-
-
-@media (min-width: 1024px) {
+ }
+ 
+ @media (min-width: 1024px) {
     .cards-container {
         grid-template-columns: repeat(5, 1fr);
-        gap: 20px;
     }
-}
+ }
+ 
