@@ -54,32 +54,48 @@ async function displayPokemons(pokemonList) {
 }
 
 async function searchPokemon() {
-  const searchInputElement = document.getElementById("search-input");
-  const searchInput = searchInputElement.value.toLowerCase().trim();
-  searchInputElement.value = "";
-  if (searchInput === "") {
-    fetchPokemons(currentPage);
-    return;
-  }
-  const pokemonCards = document.querySelectorAll(".pokemon-card");
-  pokemonCardsContainer.innerHTML = "";
-  for (const card of pokemonCards) {
-    const pokemonName = card.querySelector("h3").textContent.toLowerCase();
-    const pokemonSprite = card.querySelector("img").src;
-    const pokemonTypes = card.querySelector("p").textContent;
+  const searchInput = document.getElementById('search-input');
+  const searchValue = searchInput.value.toLowerCase();
 
-    if (pokemonName.includes(searchInput)) {
-      const newCard = `
-          <div class="pokemon-card">
-            <img src="${pokemonSprite}">
-            <h3>${pokemonName}</h3>
-            <p>${pokemonTypes}</p>
-          </div>
-        `;
-      pokemonCardsContainer.innerHTML += newCard;
-    }
+  if (searchValue) {
+      try {
+          const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchValue}`);
+          if (response.ok) {
+              const pokemon = await response.json();
+              displaySinglePokemon(pokemon);
+          } else if (response.status === 404) {
+              pokemonCardsContainer.innerHTML = `
+                  <div class="error-message">
+                      <h2>¡Oh no!</h2>
+                      <p>No pudimos encontrar el Pokémon "${searchValue}"</p>
+                  </div>
+              `;
+          } 
+      } catch (error) {
+          console.log('Error al buscar el Pokemon:', error);
+      }
+  } else {
+      fetchPokemons(currentPage);
   }
+  searchInput.value = '';
 }
+
+function displaySearchPokemon(pokemon) {
+  pokemonCardsContainer.innerHTML = '';
+
+  const sprite = pokemon.sprites.front_default;
+  const types = pokemon.types.map(typeInfo => typeInfo.type.name).join(', ');
+
+  const card = `
+      <div class="pokemon-card">
+          <h3>${pokemon.name}</h3>
+          <img src="${sprite}" alt="${pokemon.name}">
+          <p>Tipo: ${types}</p>
+      </div>
+  `;
+  pokemonCardsContainer.innerHTML = card;
+}
+
 
 function nextPage() {
   currentPage++;
